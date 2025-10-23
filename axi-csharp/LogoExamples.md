@@ -70,7 +70,7 @@ end
 to grid :size :spacing [
   repeat 3 [
     penup
-    goto 0 :spacing
+    setxy 0 :spacing
     pendown
     square :size
     make "spacing :spacing + :size + 10

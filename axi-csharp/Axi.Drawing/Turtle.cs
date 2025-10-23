@@ -120,9 +120,9 @@ public class Turtle
     }
 
     /// <summary>
-    /// Moves the turtle to a specific position
+    /// Moves the turtle to a specific position (standard Logo command)
     /// </summary>
-    public void GoTo(double x, double y)
+    public void SetXY(double x, double y)
     {
         _position = new Point(x, y);
 
@@ -133,11 +133,27 @@ public class Turtle
     }
 
     /// <summary>
+    /// Sets the X coordinate of the turtle position
+    /// </summary>
+    public void SetX(double x)
+    {
+        SetXY(x, _position.Y);
+    }
+
+    /// <summary>
+    /// Sets the Y coordinate of the turtle position
+    /// </summary>
+    public void SetY(double y)
+    {
+        SetXY(_position.X, y);
+    }
+
+    /// <summary>
     /// Returns the turtle to the origin (0, 0) with heading 90 (up)
     /// </summary>
     public void Home()
     {
-        GoTo(0, 0);
+        SetXY(0, 0);
         SetHeading(90);
     }
 

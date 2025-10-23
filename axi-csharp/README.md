@@ -58,6 +58,12 @@ The application supports the following Logo-style commands:
 ### Turning
 - `right [angle]` or `rt [angle]` - Turn right in degrees
 - `left [angle]` or `lt [angle]` - Turn left in degrees
+- `setheading [angle]` or `seth [angle]` - Set absolute heading in degrees
+
+### Positioning
+- `setxy [x] [y]` - Move to absolute position (x, y)
+- `setx [x]` - Set X coordinate
+- `sety [y]` - Set Y coordinate
 
 ### Pen Control
 - `penup` or `pu` - Lift pen (stop drawing)

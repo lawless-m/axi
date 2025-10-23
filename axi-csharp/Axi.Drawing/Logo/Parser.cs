@@ -230,7 +230,7 @@ public class Parser
             "setheading" or "seth" => 1,
             "setx" => 1,
             "sety" => 1,
-            "goto" => 2,
+            "setxy" => 2,
             "box" => 2,
             "square" => 1,
             "circle" => 1,
@@ -249,6 +249,7 @@ public class Parser
                "forward" or "fd" or "backward" or "bk" or "back" or
                "right" or "rt" or "left" or "lt" or
                "penup" or "pu" or "pendown" or "pd" or
+               "setheading" or "seth" or "setxy" or "setx" or "sety" or
                "home" or "clear" or "box" or "square" or "circle";
     }
 }

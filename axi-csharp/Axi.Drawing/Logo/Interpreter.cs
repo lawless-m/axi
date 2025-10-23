@@ -154,12 +154,12 @@ public class Interpreter
                 }
                 break;
 
-            case "goto":
+            case "setxy":
                 if (command.Arguments.Count >= 2)
                 {
                     var x = EvaluateExpression(command.Arguments[0]);
                     var y = EvaluateExpression(command.Arguments[1]);
-                    turtle.GoTo(x, y);
+                    turtle.SetXY(x, y);
                 }
                 break;
 
@@ -167,7 +167,7 @@ public class Interpreter
                 if (command.Arguments.Count > 0)
                 {
                     var x = EvaluateExpression(command.Arguments[0]);
-                    turtle.GoTo(x, turtle.Position.Y);
+                    turtle.SetX(x);
                 }
                 break;
 
@@ -175,7 +175,7 @@ public class Interpreter
                 if (command.Arguments.Count > 0)
                 {
                     var y = EvaluateExpression(command.Arguments[0]);
-                    turtle.GoTo(turtle.Position.X, y);
+                    turtle.SetY(y);
                 }
                 break;
 

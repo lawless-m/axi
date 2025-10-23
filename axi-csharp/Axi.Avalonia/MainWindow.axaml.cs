@@ -41,7 +41,7 @@ public partial class MainWindow : Window
             _commandInput.KeyDown += CommandInput_KeyDown;
 
         // Center the turtle
-        _turtle.GoTo(0, 0);
+        _turtle.SetXY(0, 0);
         UpdateCanvas();
     }
 
