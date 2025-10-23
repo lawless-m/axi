@@ -34,12 +34,14 @@
     <!-- Status and help -->
     <StackPanel Grid.Row="2" Margin="10,0,10,10">
       <TextBlock Name="StatusText"
-                 Text="Ready. Try: forward 100, right 90, box 50 30, circle 40"
+                 Text="Ready. Try: repeat 4 [ forward 100 right 90 ] or to square :size [ repeat 4 [ forward :size right 90 ] ] end"
                  FontSize="12"
                  Foreground="#666" />
       <TextBlock FontSize="11" Foreground="#999" Margin="0,5,0,0">
-        Commands: forward/fd [distance], backward/bk [distance], right/rt [angle], left/lt [angle],
-        penup/pu, pendown/pd, box [width] [height], square [size], circle [radius], home, clear
+        Commands: forward/fd, backward/bk, right/rt, left/lt, penup/pu, pendown/pd, box, square, circle, home, clear
+      </TextBlock>
+      <TextBlock FontSize="11" Foreground="#999" Margin="0,2,0,0">
+        Control: repeat N [ commands ], to name :param [ commands ] end, make "var value, :var (use variable)
       </TextBlock>
     </StackPanel>
   </Grid>

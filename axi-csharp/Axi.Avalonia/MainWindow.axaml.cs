@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Axi.Drawing;
+using Axi.Drawing.Logo;
 
 namespace Axi.Avalonia;
 
 public partial class MainWindow : Window
 {
+    private readonly LogoRunner _logoRunner;
     private readonly Turtle _turtle;
     private Canvas? _canvas;
     private TextBox? _commandInput;
@@ -20,6 +22,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         _turtle = new Turtle();
+        _logoRunner = new LogoRunner(_turtle);
 
         _canvas = this.FindControl<Canvas>("DrawingCanvas");
         _commandInput = this.FindControl<TextBox>("CommandInput");
@@ -75,7 +78,7 @@ public partial class MainWindow : Window
 
         try
         {
-            ExecuteCommand(commandText);
+            _logoRunner.Run(commandText);
             UpdateCanvas();
             UpdateStatus($"Executed: {commandText}");
             _commandInput.Text = "";
@@ -83,99 +86,6 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             UpdateStatus($"Error: {ex.Message}");
-        }
-    }
-
-    private void ExecuteCommand(string commandText)
-    {
-        var commands = commandText.Split(new[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-        foreach (var cmd in commands)
-        {
-            var parts = cmd.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length == 0) continue;
-
-            var command = parts[0].ToLower();
-            var args = parts.Skip(1).ToArray();
-
-            switch (command)
-            {
-                case "forward":
-                case "fd":
-                    if (args.Length > 0 && double.TryParse(args[0], out var fwdDist))
-                        _turtle.Forward(fwdDist);
-                    else
-                        throw new ArgumentException("forward requires a distance");
-                    break;
-
-                case "backward":
-                case "bk":
-                    if (args.Length > 0 && double.TryParse(args[0], out var bkDist))
-                        _turtle.Backward(bkDist);
-                    else
-                        throw new ArgumentException("backward requires a distance");
-                    break;
-
-                case "right":
-                case "rt":
-                    if (args.Length > 0 && double.TryParse(args[0], out var rtAngle))
-                        _turtle.Right(rtAngle);
-                    else
-                        throw new ArgumentException("right requires an angle");
-                    break;
-
-                case "left":
-                case "lt":
-                    if (args.Length > 0 && double.TryParse(args[0], out var ltAngle))
-                        _turtle.Left(ltAngle);
-                    else
-                        throw new ArgumentException("left requires an angle");
-                    break;
-
-                case "penup":
-                case "pu":
-                    _turtle.PenUp();
-                    break;
-
-                case "pendown":
-                case "pd":
-                    _turtle.PenDown();
-                    break;
-
-                case "box":
-                    if (args.Length >= 2 &&
-                        double.TryParse(args[0], out var width) &&
-                        double.TryParse(args[1], out var height))
-                        _turtle.Box(width, height);
-                    else
-                        throw new ArgumentException("box requires width and height");
-                    break;
-
-                case "square":
-                    if (args.Length > 0 && double.TryParse(args[0], out var size))
-                        _turtle.Square(size);
-                    else
-                        throw new ArgumentException("square requires a size");
-                    break;
-
-                case "circle":
-                    if (args.Length > 0 && double.TryParse(args[0], out var radius))
-                        _turtle.Circle(radius);
-                    else
-                        throw new ArgumentException("circle requires a radius");
-                    break;
-
-                case "home":
-                    _turtle.Home();
-                    break;
-
-                case "clear":
-                    _turtle.Clear();
-                    break;
-
-                default:
-                    throw new ArgumentException($"Unknown command: {command}");
-            }
         }
     }
 
